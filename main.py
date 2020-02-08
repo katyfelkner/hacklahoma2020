@@ -16,6 +16,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+import pymongo
 
 # TODO: move pw into an environment variable to keep this secure
 client = pymongo.MongoClient("mongodb+srv://admin:hackybois@cluster0-o46xu.gcp.mongodb.net/test?retryWrites=true&w=majority")
