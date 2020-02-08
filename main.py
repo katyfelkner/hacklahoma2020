@@ -14,7 +14,17 @@
 
 # [START gae_python37_app]
 from flask import Flask
+from flask import request
 
+
+# TODO: move pw into an environment variable to keep this secure
+client = pymongo.MongoClient("mongodb+srv://admin:hackybois@cluster0-o46xu.gcp.mongodb.net/test?retryWrites=true&w=majority")
+db = client.test
+
+
+# this entire application depends on a bunch of globals. Terrible practice.
+score_vector = []
+rating_vector = []
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
@@ -26,6 +36,26 @@ def hello():
     """Return a friendly HTTP greeting."""
     return 'Hello World!'
 
+@app.route('/loadgame')
+def load_next_game():
+    # read results of last game
+    finish_game(request.args.get('score'), request.args.get('rating'))
+
+    # call RL agent to get a decision on next game to run
+def finish_game(score, rating):
+    # if not none, add to vectors
+    if score:
+        score_vector.append(score)
+    if rating:
+        rating_vector.append(rating)
+
+    # check if it's time to batch learn and reassess
+    # call that if needed
+
+    # else return
+def batch_learn():
+    # time to batch learn 
+    
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
@@ -33,3 +63,5 @@ if __name__ == '__main__':
     # can be configured by adding an `entrypoint` to app.yaml.
     app.run(host='127.0.0.1', port=8080, debug=True)
 # [END gae_python37_app]
+
+
