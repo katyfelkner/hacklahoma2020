@@ -15,7 +15,7 @@
 # [START gae_python37_app]
 from flask import Flask
 from flask import request
-
+from flask import render_template
 
 # TODO: move pw into an environment variable to keep this secure
 client = pymongo.MongoClient("mongodb+srv://admin:hackybois@cluster0-o46xu.gcp.mongodb.net/test?retryWrites=true&w=majority")
@@ -32,9 +32,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
-    """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+def homepage():
+    return render_template('index.html')
 
 @app.route('/loadgame')
 def load_next_game():
