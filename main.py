@@ -42,6 +42,11 @@ def load_next_game():
     finish_game(request.args.get('score'), request.args.get('rating'))
 
     # call RL agent to get a decision on next game to run
+
+@app.route('/shapesgame')
+def load_shapes_game():
+    return render_template('shapes_game.html')
+    
 def finish_game(score, rating):
     # if not none, add to vectors
     if score:
