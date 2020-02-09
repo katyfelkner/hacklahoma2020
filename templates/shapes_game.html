@@ -66,7 +66,16 @@ img {
       let coneImages = ["cone-1.png", "cone-2.png"];
       let triprismImages = ["triprism-1.png", "triprism-2.png"]
       let cubeImages = ["cube-1.png", "cube-2.png", "cube-3.png", "cube-4.png", "cube-5.png", "cube-6.png", "cube-7.png", "cube-8.png", "cube-9.png", "cube-10.png", "cube-11.png"]
-
+      function shuffle(a) {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+          x = a[i];
+          a[i] = a[j];
+          a[j] = x;
+        }
+        return a;
+}
       function setPaths() {
         // append right answer
         answersArray.push(twoDImages[Math.floor(Math.random()*twoDImages.length)])
